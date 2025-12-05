@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Tabs from "../components/Tabs";
 import ChartWrapper from "../components/ChartWrapper";
+import Loader from "../components/Loader"; 
 import { getForecast } from "../services/api";
 
 export default function Forecast() {
@@ -9,15 +10,17 @@ export default function Forecast() {
 
   const [forecastData, setForecastData] = useState([]);
   const [activeTab, setActiveTab] = useState("today");
-
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function load() {
       try {
+        setLoading(true);
+
         const data = await getForecast(city);
 
         const formatted = data.map((entry) => ({
-          time: entry.timestamp * 1000, // 
+          time: entry.timestamp * 1000,
           label: new Date(entry.timestamp * 1000).toLocaleTimeString("en-US", {
             hour: "2-digit",
             minute: "2-digit",
@@ -42,18 +45,22 @@ export default function Forecast() {
         } catch {
           localStorage.removeItem("forecast_data");
         }
+
+      } finally {
+        setLoading(false);
       }
     }
 
     load();
   }, [city]);
 
+
   function buildDailyCards(hourly) {
     const days = {};
 
     hourly.forEach((item) => {
       const d = new Date(item.time);
-      const key = d.toISOString().split("T")[0]; 
+      const key = d.toISOString().split("T")[0];
 
       if (!days[key]) days[key] = { temps: [], winds: [] };
 
@@ -69,30 +76,39 @@ export default function Forecast() {
         date: new Date(date),
         max: Math.max(...temps),
         min: Math.min(...temps),
-        wind: Math.round(
-          winds.reduce((a, b) => a + b, 0) / winds.length
-        ),
-        rain: (Math.random() * 2).toFixed(1), 
+        wind: Math.round(winds.reduce((a, b) => a + b, 0) / winds.length),
+        rain: (Math.random() * 2).toFixed(1),
       };
     });
   }
 
-
   function getWeatherIcon(day) {
-    if (day.rain > 1) return "🌧️";     
-    if (day.max >= 30) return "☀️";     
-    if (day.wind > 5) return "🌬️";      
-    return "⛅";                          
+    if (day.rain > 1) return "🌧️";
+    if (day.max >= 30) return "☀️";
+    if (day.wind > 5) return "🌬️";
+    return "⛅";
   }
 
-  const todayData = forecastData.slice(0, 8);      
-  const tomorrowData = forecastData.slice(8, 16);  
+  const todayData = forecastData.slice(0, 8);
+  const tomorrowData = forecastData.slice(8, 16);
   const weekCards = buildDailyCards(forecastData);
 
   const tabData = {
     today: todayData,
     tomorrow: tomorrowData,
   };
+
+
+  if (loading) {
+    return (
+      <div style={{ textAlign: "center", marginTop: "40px" }}>
+        <Loader />
+        <p style={{ color: "white", marginTop: "15px" }}>
+          Loading forecast for {city}...
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div>
