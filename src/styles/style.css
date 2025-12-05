@@ -1,0 +1,583 @@
+/* ================================
+   GLOBAL RESET & BODY
+================================ */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+
+  /* Premium Sky Gradient */
+  background: linear-gradient(135deg, #161616 0%, #d31434 100%);
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  padding-top: 40px;
+  overflow-y: auto;
+}
+
+/* Glassmorphic container */
+.container {
+  width: 95%;
+  max-width: 1100px;
+
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(25px);
+  border-radius: 30px;
+  padding: 35px;
+
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow: 0 20px 40px rgba(0, 50, 100, 0.15);
+}
+
+/* ================================
+   HEADER
+================================ */
+/* ================================
+   HEADER (Hero style)
+================================ */
+header {
+  background: rgba(255, 255, 255, 0.20);
+  padding: 32px 40px;              /* bigger height */
+  border-radius: 24px;
+  
+  display: flex;                   /* center everything nicely */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  text-align: center;
+  margin-bottom: 28px;
+
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 14px 32px rgba(255, 255, 255, 0.2);
+}
+
+/* Title text inside header */
+header h1 {
+  margin: 0;
+  font-size: 34px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 1px;
+}
+
+/* Nav / Home link */
+header nav a {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1b2a6e;
+  text-decoration: none;
+}
+
+header nav a:hover {
+  text-decoration: underline;
+}
+
+
+/* ================================
+   SEARCH BAR (Modern UI)
+================================ */
+.search-box {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+
+  /* 🔥 Make input expand full width */
+  max-width: 1900px;
+  margin: 0 auto 25px auto;
+}
+
+.search-box input {
+  flex: 1; /* FULL LINE */
+  padding: 14px 20px;
+  font-size: 16px;
+
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+}
+
+.search-box button {
+  padding: 14px 24px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #00c6fb, #005bea);
+  font-weight: 700;
+  color: #fff;
+  box-shadow: 0 10px 20px rgba(0, 91, 234, 0.25);
+}
+
+
+/* ================================
+   REUSABLE BUTTONS
+================================ */
+.btn {
+  padding: 10px 16px;
+  background: linear-gradient(135deg, #00c6fb, #005bea);
+  color: white;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  font-weight: 700;
+  box-shadow: 0 6px 20px rgba(0, 91, 234, 0.25);
+  transition: 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+}
+
+.btn-sm {
+  padding: 7px 12px;
+  font-size: 13px;
+}
+
+.btn.remove {
+  background: linear-gradient(135deg, #ff6b6b, #b52b27);
+}
+
+.btn.remove:hover {
+  filter: brightness(1.05);
+}
+
+/* ================================
+   CARD COMPONENT (Glass Card)
+================================ */
+.card {
+  background: rgba(255, 255, 255, 0.65);
+  padding: 25px;
+  border-radius: 20px;
+
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.07);
+
+  margin-top: 20px;
+}
+
+.card-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #005bea;
+  margin-bottom: 10px;
+}
+
+.card-body p {
+  margin: 6px 0;
+  font-size: 15px;
+  color: #2c3e50;
+}
+
+/* ================================
+   TABS
+================================ */
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin: 25px 0;
+}
+
+.tabs button {
+  padding: 10px 20px;
+  border-radius: 20px;
+
+  background: rgba(255,255,255,0.8);
+  border: 1px solid #ddd;
+  cursor: pointer;
+  font-weight: 600;
+
+  transition: all 0.3s ease;
+}
+
+.tabs button.active {
+  background: #4facfe;
+  color: white;
+  border-color: #4facfe;
+}
+
+.tabs button:hover {
+  transform: translateY(-2px);
+  background: #fff;
+}
+
+/* ================================
+   CHART WRAPPER
+================================ */
+.chart-box {
+  background: rgba(255, 255, 255, 0.65);
+  padding: 25px;
+  border-radius: 18px;
+
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+
+  margin: 25px 0;
+  height: 320px;
+}
+
+/* ================================
+   RECENT SEARCH HISTORY
+================================ */
+.history-list {
+  background: rgba(255,255,255,0.7);
+  padding: 15px;
+  border-radius: 14px;
+
+  border: 1px solid rgba(255,255,255,0.45);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+
+  margin-bottom: 20px;
+}
+
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 6px;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
+.history-item:last-child {
+  border-bottom: none;
+}
+
+/* ================================
+   FAVORITES SIDEBAR
+================================ */
+.favorite-item {
+  padding: 8px 6px;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  display: flex;
+  justify-content: space-between;
+}
+
+.favorite-item:last-child {
+  border-bottom: none;
+}
+
+/* ================================
+   LOADER
+================================ */
+.loader {
+  margin: 20px auto;
+  border: 4px solid rgba(255,255,255,0.5);
+  border-top: 4px solid #005bea;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ================================
+   ERROR BOX
+================================ */
+.error-box {
+  background: rgba(255, 92, 92, 0.2);
+  padding: 14px;
+  border-left: 6px solid #ff4d4f;
+  border-radius: 10px;
+  color: #8b0000;
+  margin: 10px 0;
+}
+
+/* ================================
+   UTILITY
+================================ */
+.flex { display: flex; }
+.space-between { justify-content: space-between; }
+.mt-20 { margin-top: 20px; }
+
+/* ================================
+   HOME PAGE LAYOUT
+================================ */
+.home-layout {
+  display: flex;
+  gap: 25px;
+  width: 100%;
+}
+
+/* LEFT SIDE PANEL */
+.left-panel {
+  flex: 1;
+}
+
+/* RIGHT SIDE PANEL (Favorites Sidebar) */
+.right-panel {
+  width: 260px;
+}
+
+/* ================================
+   FAVORITES BOX (Glass UI)
+================================ */
+.favorites-box {
+  background: rgba(255, 255, 255, 0.7);
+  padding: 18px;
+  border-radius: 18px;
+
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.10);
+}
+
+.favorites-box h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: #005bea;
+  font-size: 20px;
+}
+
+/* A single Favorite Item */
+.favorite-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 10px 6px;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
+.favorite-item:last-child {
+  border-bottom: none;
+}
+
+/* Favorite Buttons Container */
+.fav-buttons {
+  display: flex;
+  gap: 12px;        /* creates clean space between the two buttons */
+  align-items: center;
+}
+
+.fav-buttons .btn-sm {
+  padding: 6px 12px;
+  font-size: 13px;
+  border-radius: 10px;
+}
+
+
+/* ================================
+   RECENT SEARCH CLEANUP
+================================ */
+.history-list h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: #005bea;
+}
+
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 10px 6px;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
+/* ================================
+   RESPONSIVE FIXES
+================================ */
+@media (max-width: 900px) {
+  .home-layout {
+    flex-direction: column;
+  }
+
+  .right-panel {
+    width: 100%;
+  }
+}
+/* ================================
+   BEAUTIFUL GLASSY CHART CARD
+================================ */
+.chart-card {
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(18px);
+  border-radius: 22px;
+
+  padding: 25px 30px;
+  margin: 25px 0;
+
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+
+  animation: fadeIn 0.4s ease;
+}
+
+.chart-card h4 {
+  margin: 0 0 15px 0;
+  color: #003c8f;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* Fade Anim */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.week-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.week-card {
+  background: rgba(255,255,255,0.75);
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  backdrop-filter: blur(15px);
+  transition: transform .3s, box-shadow .3s;
+}
+
+.week-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.weather-icon {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+
+.week-card h4 {
+  font-size: 17px;
+  margin-bottom: 10px;
+  color: #005bea;
+  font-weight: 700;
+}
+
+.week-card .max {
+  color: #e74c3c;
+  font-weight: 600;
+}
+
+.week-card .min {
+  color: #3498db;
+  font-weight: 600;
+}
+
+.week-card .wind {
+  color: #27ae60;
+  font-weight: 600;
+}
+
+.week-card .rain {
+  margin-top: 6px;
+  background: rgba(39, 174, 96, 0.15);
+  color: #27ae60;
+  padding: 4px 10px;
+  display: inline-block;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 13px;
+}
+/* =====================================================
+   FIX HOME PAGE LAYOUT (EVEN BOXES + PERFECT ALIGNMENT)
+===================================================== */
+
+/* Home container wrapper */
+.home-container {
+  width: 100%;
+  max-width: 1100px;
+  margin: auto;
+}
+
+/* TOP SECTION — Search + Favorites */
+.top-section {
+  display: flex;
+  flex-direction: column;  /* <-- puts Search on top, Favorites below */
+  gap: 20px;
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+.search-box-wrapper {
+  width: 100%;
+}
+
+.favorites-box {
+  width: 100%;         /* full row */
+  margin-top: 10px;
+}
+
+
+/* MIDDLE GRID — Recent + Weather Card */
+.middle-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  width: 100%;
+}
+
+/* Make both boxes SAME HEIGHT */
+.recent-box,
+.weather-card {
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Weather card improvements */
+.weather-card .card-body p {
+  margin: 6px 0;
+}
+
+/* Beautiful button alignment */
+.weather-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+/* Fix uneven Favorite items */
+.favorite-item span {
+  font-weight: 600;
+}
+
+/* Fix recent history spacing */
+.history-item span {
+  font-size: 14px;
+}
+
+/* Make both side panels equal visually */
+.favorites-box,
+.recent-box {
+  background: rgba(255, 255, 255, 0.55) !important;
+  backdrop-filter: blur(22px) !important;
+  border-radius: 18px;
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* RESPONSIVE FIXES */
+@media (max-width: 900px) {
+  .top-section {
+    flex-direction: column;
+  }
+  .favorites-box {
+    width: 100%;
+  }
+  .middle-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.icon {
+  display: inline-block;
+  margin-right: 6px;
+  font-size: 20px;
+}
