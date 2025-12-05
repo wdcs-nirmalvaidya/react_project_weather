@@ -18,7 +18,7 @@ export default function ChartWrapper({ title, data, dataKey }) {
     );
   }
 
-  // Format time → "02:30 PM"
+
   const formatTime = (val) =>
     new Date(val).toLocaleTimeString([], {
       hour: "2-digit",

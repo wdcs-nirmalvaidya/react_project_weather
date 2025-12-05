@@ -1,6 +1,4 @@
-/* ================================
-   GLOBAL RESET & BODY
-================================ */
+
 * {
   box-sizing: border-box;
 }
@@ -10,7 +8,7 @@ body {
   padding: 0;
   font-family: "Inter", sans-serif;
 
-  /* Premium Sky Gradient */
+  
   background: linear-gradient(135deg, #161616 0%, #d31434 100%);
   min-height: 100vh;
 
@@ -20,7 +18,7 @@ body {
   overflow-y: auto;
 }
 
-/* Glassmorphic container */
+
 .container {
   width: 95%;
   max-width: 1100px;
@@ -34,18 +32,12 @@ body {
   box-shadow: 0 20px 40px rgba(0, 50, 100, 0.15);
 }
 
-/* ================================
-   HEADER
-================================ */
-/* ================================
-   HEADER (Hero style)
-================================ */
 header {
   background: rgba(255, 255, 255, 0.20);
-  padding: 32px 40px;              /* bigger height */
+  padding: 32px 40px;              
   border-radius: 24px;
   
-  display: flex;                   /* center everything nicely */
+  display: flex;                   
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -58,7 +50,7 @@ header {
   box-shadow: 0 14px 32px rgba(255, 255, 255, 0.2);
 }
 
-/* Title text inside header */
+
 header h1 {
   margin: 0;
   font-size: 34px;
@@ -67,7 +59,6 @@ header h1 {
   letter-spacing: 1px;
 }
 
-/* Nav / Home link */
 header nav a {
   font-size: 16px;
   font-weight: 600;
@@ -80,22 +71,19 @@ header nav a:hover {
 }
 
 
-/* ================================
-   SEARCH BAR (Modern UI)
-================================ */
 .search-box {
   width: 100%;
   display: flex;
   justify-content: center;
   gap: 20px;
 
-  /* 🔥 Make input expand full width */
+
   max-width: 1900px;
   margin: 0 auto 25px auto;
 }
 
 .search-box input {
-  flex: 1; /* FULL LINE */
+  flex: 1; 
   padding: 14px 20px;
   font-size: 16px;
 
@@ -115,9 +103,7 @@ header nav a:hover {
 }
 
 
-/* ================================
-   REUSABLE BUTTONS
-================================ */
+
 .btn {
   padding: 10px 16px;
   background: linear-gradient(135deg, #00c6fb, #005bea);
@@ -148,9 +134,6 @@ header nav a:hover {
   filter: brightness(1.05);
 }
 
-/* ================================
-   CARD COMPONENT (Glass Card)
-================================ */
 .card {
   background: rgba(255, 255, 255, 0.65);
   padding: 25px;
@@ -175,9 +158,7 @@ header nav a:hover {
   color: #2c3e50;
 }
 
-/* ================================
-   TABS
-================================ */
+
 .tabs {
   display: flex;
   gap: 10px;
@@ -207,9 +188,7 @@ header nav a:hover {
   background: #fff;
 }
 
-/* ================================
-   CHART WRAPPER
-================================ */
+
 .chart-box {
   background: rgba(255, 255, 255, 0.65);
   padding: 25px;
@@ -222,9 +201,7 @@ header nav a:hover {
   height: 320px;
 }
 
-/* ================================
-   RECENT SEARCH HISTORY
-================================ */
+
 .history-list {
   background: rgba(255,255,255,0.7);
   padding: 15px;
@@ -247,9 +224,7 @@ header nav a:hover {
   border-bottom: none;
 }
 
-/* ================================
-   FAVORITES SIDEBAR
-================================ */
+
 .favorite-item {
   padding: 8px 6px;
   border-bottom: 1px solid rgba(0,0,0,0.08);
@@ -261,9 +236,6 @@ header nav a:hover {
   border-bottom: none;
 }
 
-/* ================================
-   LOADER
-================================ */
 .loader {
   margin: 20px auto;
   border: 4px solid rgba(255,255,255,0.5);
@@ -279,9 +251,7 @@ header nav a:hover {
   to { transform: rotate(360deg); }
 }
 
-/* ================================
-   ERROR BOX
-================================ */
+
 .error-box {
   background: rgba(255, 92, 92, 0.2);
   padding: 14px;
@@ -291,35 +261,28 @@ header nav a:hover {
   margin: 10px 0;
 }
 
-/* ================================
-   UTILITY
-================================ */
+
 .flex { display: flex; }
 .space-between { justify-content: space-between; }
 .mt-20 { margin-top: 20px; }
 
-/* ================================
-   HOME PAGE LAYOUT
-================================ */
+
 .home-layout {
   display: flex;
   gap: 25px;
   width: 100%;
 }
 
-/* LEFT SIDE PANEL */
 .left-panel {
   flex: 1;
 }
 
-/* RIGHT SIDE PANEL (Favorites Sidebar) */
+
 .right-panel {
   width: 260px;
 }
 
-/* ================================
-   FAVORITES BOX (Glass UI)
-================================ */
+
 .favorites-box {
   background: rgba(255, 255, 255, 0.7);
   padding: 18px;
@@ -336,7 +299,7 @@ header nav a:hover {
   font-size: 20px;
 }
 
-/* A single Favorite Item */
+
 .favorite-item {
   display: flex;
   justify-content: space-between;
@@ -350,10 +313,10 @@ header nav a:hover {
   border-bottom: none;
 }
 
-/* Favorite Buttons Container */
+
 .fav-buttons {
   display: flex;
-  gap: 12px;        /* creates clean space between the two buttons */
+  gap: 12px;        
   align-items: center;
 }
 
@@ -364,9 +327,6 @@ header nav a:hover {
 }
 
 
-/* ================================
-   RECENT SEARCH CLEANUP
-================================ */
 .history-list h3 {
   margin-top: 0;
   margin-bottom: 12px;
@@ -382,9 +342,7 @@ header nav a:hover {
   border-bottom: 1px solid rgba(0,0,0,0.08);
 }
 
-/* ================================
-   RESPONSIVE FIXES
-================================ */
+
 @media (max-width: 900px) {
   .home-layout {
     flex-direction: column;
@@ -394,9 +352,7 @@ header nav a:hover {
     width: 100%;
   }
 }
-/* ================================
-   BEAUTIFUL GLASSY CHART CARD
-================================ */
+
 .chart-card {
   background: rgba(255, 255, 255, 0.35);
   backdrop-filter: blur(18px);
@@ -418,7 +374,7 @@ header nav a:hover {
   font-weight: 700;
 }
 
-/* Fade Anim */
+
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -484,21 +440,19 @@ header nav a:hover {
   font-weight: 600;
   font-size: 13px;
 }
-/* =====================================================
-   FIX HOME PAGE LAYOUT (EVEN BOXES + PERFECT ALIGNMENT)
-===================================================== */
 
-/* Home container wrapper */
+
+
 .home-container {
   width: 100%;
   max-width: 1100px;
   margin: auto;
 }
 
-/* TOP SECTION — Search + Favorites */
+
 .top-section {
   display: flex;
-  flex-direction: column;  /* <-- puts Search on top, Favorites below */
+  flex-direction: column;  
   gap: 20px;
   width: 100%;
   margin-bottom: 25px;
@@ -509,12 +463,12 @@ header nav a:hover {
 }
 
 .favorites-box {
-  width: 100%;         /* full row */
+  width: 100%;         
   margin-top: 10px;
 }
 
 
-/* MIDDLE GRID — Recent + Weather Card */
+
 .middle-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -522,7 +476,6 @@ header nav a:hover {
   width: 100%;
 }
 
-/* Make both boxes SAME HEIGHT */
 .recent-box,
 .weather-card {
   min-height: 260px;
@@ -531,12 +484,12 @@ header nav a:hover {
   justify-content: space-between;
 }
 
-/* Weather card improvements */
+
 .weather-card .card-body p {
   margin: 6px 0;
 }
 
-/* Beautiful button alignment */
+
 .weather-buttons {
   display: flex;
   justify-content: space-between;
@@ -544,17 +497,15 @@ header nav a:hover {
   margin-top: 15px;
 }
 
-/* Fix uneven Favorite items */
 .favorite-item span {
   font-weight: 600;
 }
 
-/* Fix recent history spacing */
 .history-item span {
   font-size: 14px;
 }
 
-/* Make both side panels equal visually */
+
 .favorites-box,
 .recent-box {
   background: rgba(255, 255, 255, 0.55) !important;
@@ -564,7 +515,7 @@ header nav a:hover {
   border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
-/* RESPONSIVE FIXES */
+
 @media (max-width: 900px) {
   .top-section {
     flex-direction: column;
