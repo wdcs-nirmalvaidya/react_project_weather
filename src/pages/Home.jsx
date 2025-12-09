@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import SearchBar from "../components/SearchBar";
 import Card from "../components/Card";
 import Loader from "../components/Loader";
 import ErrorBox from "../components/ErrorBox";
@@ -7,7 +6,7 @@ import useLocalStorage from "../hooks/useLocalStorage";
 import { getWeather } from "../services/api";
 import { useNavigate } from "react-router-dom";
 
-export default function Home() {
+export default function Home({ registerSearchFn }) {
   const [data, setData] = useLocalStorage("current_weather", null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -17,18 +16,20 @@ export default function Home() {
   const [history, setHistory] = useLocalStorage("history", []);
   const [favorites, setFavorites] = useLocalStorage("favorites", []);
 
+
+  useEffect(() => {
+    registerSearchFn?.(handleSearch);
+  }, []);
+
+
   useEffect(() => {
     function safeLoad(key, setter) {
       try {
         const raw = localStorage.getItem(key);
         if (!raw) return;
-
         const parsed = JSON.parse(raw);
-        if (parsed !== undefined && parsed !== null) {
-          setter(parsed);
-        }
+        if (parsed) setter(parsed);
       } catch {
-        
         localStorage.removeItem(key);
       }
     }
@@ -38,7 +39,13 @@ export default function Home() {
     safeLoad("favorites", setFavorites);
   }, []);
 
+  // Search function
   const handleSearch = async (city) => {
+    if (!city?.trim()) {
+      setError("Enter a valid city name");
+      return;
+    }
+
     try {
       setLoading(true);
       setError("");
@@ -60,25 +67,28 @@ export default function Home() {
       setData(newData);
       localStorage.setItem("current_weather", JSON.stringify(newData));
 
+      // 🛑 FIX AREA: Setting the search history limit here 
       const updatedHistory = [
         { city, time: new Date().toLocaleString() },
         ...history.filter((i) => i.city !== city),
-      ].slice(0, 5);
+      ].slice(0, 5); // <-- Limit is set to 5
 
       setHistory(updatedHistory);
       localStorage.setItem("history", JSON.stringify(updatedHistory));
-
-    } catch (err) {
+    } catch {
       setError("Could not fetch weather for this city");
     } finally {
       setLoading(false);
     }
   };
 
+  // Favorites functions
   const addToFavorites = (city) => {
-    const updated = favorites.includes(city) ? favorites : [...favorites, city];
-    setFavorites(updated);
-    localStorage.setItem("favorites", JSON.stringify(updated));
+    if (!favorites.includes(city)) {
+      const updated = [...favorites, city];
+      setFavorites(updated);
+      localStorage.setItem("favorites", JSON.stringify(updated));
+    }
   };
 
   const removeFavorite = (city) => {
@@ -88,18 +98,16 @@ export default function Home() {
   };
 
   return (
-    <div className="home-container">
+    <div className="page-container">
 
-      {/* SEARCH + FAVORITES */}
-      <div className="top-section">
+      {/* ---------------------------------- */}
+      {/* ROW 1 — FAVORITES + RECENT       */}
+      {/* ---------------------------------- */}
 
-        {/* SEARCH BAR */}
-        <div className="search-box-wrapper">
-          <SearchBar onSearch={handleSearch} />
-        </div>
+      <div className="top-row">
 
-        {/* FAVORITES */}
-        <div className="favorites-box glass-card">
+        {/* FAVORITES BOX — left side */}
+        <div className="favorites-box section">
           <h3>⭐ Favorites</h3>
 
           {favorites.length === 0 ? (
@@ -108,31 +116,17 @@ export default function Home() {
             favorites.map((city, idx) => (
               <div className="favorite-item" key={idx}>
                 <span>{city}</span>
-
                 <div className="fav-buttons">
-                  <button className="btn btn-sm" onClick={() => handleSearch(city)}>
-                    Load
-                  </button>
-
-                  <button
-                    className="btn btn-sm remove"
-                    onClick={() => removeFavorite(city)}
-                  >
-                    Remove
-                  </button>
+                  <button className="btn btn-sm" onClick={() => handleSearch(city)}>Load</button>
+                  <button className="btn btn-sm remove" onClick={() => removeFavorite(city)}>Remove</button>
                 </div>
               </div>
             ))
           )}
         </div>
 
-      </div>
-
-      {/* RECENT + WEATHER CARD GRID */}
-      <div className="middle-grid">
-
-        {/* RECENT SEARCHES */}
-        <div className="recent-box glass-card">
+    
+        <div className="recent-box section">
           <h3>Recent Searches</h3>
 
           {history.length === 0 ? (
@@ -141,58 +135,31 @@ export default function Home() {
             history.map((item, idx) => (
               <div className="history-item" key={idx}>
                 <span>{item.city} — {item.time}</span>
-                <button className="btn btn-sm" onClick={() => handleSearch(item.city)}>
-                  Load
-                </button>
+                <button className="btn btn-sm" onClick={() => handleSearch(item.city)}>Load</button>
               </div>
             ))
           )}
         </div>
 
-        {/* WEATHER CARD */}
-        {data && (
-          <Card title={data.city} className="weather-card glass-card">
-            <p>
-              <span className="icon">🌡️</span>
-              <b>Temperature:</b> {data.temp}°C
-            </p>
-            <p>
-              <span className="icon">🥵</span>
-              <b>Feels Like:</b> {data.feels_like}°C
-            </p>
-            <p>
-              <span className="icon">💧</span>
-              <b>Humidity:</b> {data.humidity}%
-            </p>
-            <p>
-              <span className="icon">🌬️</span>
-              <b>Wind Speed:</b> {data.wind} km/h
-            </p>
-            <p>
-              <span className="icon">☁️</span>
-              <b>Cloud Coverage:</b> {data.cloud}%
-            </p>
-            <p>
-              <span className="icon">🫁</span>
-              <b>AQI:</b> {data.aqi}
-            </p>
+      </div>
+
+      {data && (
+        <div className="weather-section section">
+          <Card title={data.city}>
+            <p><span className="icon">🌡️</span><b>Temperature:</b> {data.temp}°C</p>
+            <p><span className="icon">🥵</span><b>Feels Like:</b> {data.feels_like}°C</p>
+            <p><span className="icon">💧</span><b>Humidity:</b> {data.humidity}%</p>
+            <p><span className="icon">🌬️</span><b>Wind Speed:</b> {data.wind} km/h</p>
+            <p><span className="icon">☁️</span><b>Cloud Coverage:</b> {data.cloud}%</p>
+            <p><span className="icon">🫁</span><b>AQI:</b> {data.aqi}</p>
 
             <div className="weather-buttons">
-              <button className="btn btn-sm" onClick={() => addToFavorites(data.city)}>
-                ★ Add to Favorites
-              </button>
-
-              <button
-                className="btn btn-sm"
-                onClick={() => navigate(`/forecast/${data.city}`)}
-              >
-                📈 View Forecast
-              </button>
+              <button className="btn btn-sm" onClick={() => addToFavorites(data.city)}>★ Add to Favorites</button>
+              <button className="btn btn-sm" onClick={() => navigate(`/forecast/${data.city}`)}>📈 View Forecast</button>
             </div>
           </Card>
-        )}
-
-      </div>
+        </div>
+      )}
 
       {loading && <Loader />}
       {error && <ErrorBox message={error} />}

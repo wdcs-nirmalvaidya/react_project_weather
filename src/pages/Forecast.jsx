@@ -72,11 +72,18 @@ export default function Forecast() {
       const temps = days[date].temps;
       const winds = days[date].winds;
 
+      // FIX: Check if arrays are empty and handle safely to avoid the TypeError crash
+      const safeMax = temps.length > 0 ? Math.max(...temps) : 0;
+      const safeMin = temps.length > 0 ? Math.min(...temps) : 0;
+      const safeWind = winds.length > 0 
+        ? Math.round(winds.reduce((a, b) => a + b, 0) / winds.length) 
+        : 0;
+
       return {
         date: new Date(date),
-        max: Math.max(...temps),
-        min: Math.min(...temps),
-        wind: Math.round(winds.reduce((a, b) => a + b, 0) / winds.length),
+        max: safeMax,
+        min: safeMin,
+        wind: safeWind,
         rain: (Math.random() * 2).toFixed(1),
       };
     });
@@ -112,7 +119,7 @@ export default function Forecast() {
 
   return (
     <div>
-      <h2>Forecast for {city}</h2>
+      <h2 className="nir">Forecast for {city}</h2>
 
       <Tabs
         active={activeTab}
@@ -120,24 +127,28 @@ export default function Forecast() {
         tabs={["today", "tomorrow", "week"]}
       />
 
-      {/* TODAY + TOMORROW */}
+      {/* TODAY + TOMORROW View with chart-box styling */}
       {activeTab !== "week" && (
         <>
-          <ChartWrapper
-            title="Temperature (°C)"
-            data={tabData[activeTab]}
-            dataKey="temp"
-          />
+          <div className="chart-box">
+            <ChartWrapper
+              title="Temperature (°C)"
+              data={tabData[activeTab]}
+              dataKey="temp"
+            />
+          </div>
 
-          <ChartWrapper
-            title="Wind Speed (km/h)"
-            data={tabData[activeTab]}
-            dataKey="wind"
-          />
+          <div className="chart-box">
+            <ChartWrapper
+              title="Wind Speed (km/h)"
+              data={tabData[activeTab]}
+              dataKey="wind"
+            />
+          </div>
         </>
       )}
 
-      {/* WEEK VIEW */}
+      {/* WEEK VIEW with grid and card styling */}
       {activeTab === "week" && (
         <div className="week-grid">
           {weekCards.map((d, idx) => (

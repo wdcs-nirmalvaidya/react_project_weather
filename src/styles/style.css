@@ -1,534 +1,836 @@
+/* =========================================================
+   🌍 GLOBAL RESET + BASE
+   ========================================================= */
 
-* {
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
+html,
 body {
-  margin: 0;
-  padding: 0;
-  font-family: "Inter", sans-serif;
+  width: 100%;
+  height: 100%;
+}
 
-  
-  background: linear-gradient(135deg, #161616 0%, #d31434 100%);
+body {
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+
+  /* Soft BBC-like gradient */
+  background: linear-gradient(180deg, #d3e0ff 0%, #e3ecff 40%, #f4f7ff 100%);
   min-height: 100vh;
 
   display: flex;
-  justify-content: center;
-  padding-top: 40px;
-  overflow-y: auto;
-}
-
-
-.container {
-  width: 95%;
-  max-width: 1100px;
-
-  background: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(25px);
-  border-radius: 30px;
-  padding: 35px;
-
-  border: 1px solid rgba(255, 255, 255, 0.45);
-  box-shadow: 0 20px 40px rgba(0, 50, 100, 0.15);
-}
-
-header {
-  background: rgba(255, 255, 255, 0.20);
-  padding: 32px 40px;              
-  border-radius: 24px;
-  
-  display: flex;                   
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
 
-  text-align: center;
-  margin-bottom: 28px;
-
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  box-shadow: 0 14px 32px rgba(255, 255, 255, 0.2);
+  color: #111827;
 }
 
-
-header h1 {
-  margin: 0;
-  font-size: 34px;
-  font-weight: 800;
-  color: #ffffff;
-  letter-spacing: 1px;
-}
-
-header nav a {
-  font-size: 16px;
-  font-weight: 600;
-  color: #1b2a6e;
+/* Basic link reset */
+a {
+  color: inherit;
   text-decoration: none;
 }
 
-header nav a:hover {
-  text-decoration: underline;
-}
-
-
-.search-box {
-  width: 100%;
+/* Utility flex helpers */
+.flex {
   display: flex;
+}
+.flex-center {
+  display: flex;
+  align-items: center;
   justify-content: center;
-  gap: 20px;
-
-
-  max-width: 1900px;
-  margin: 0 auto 25px auto;
+}
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.search-box input {
-  flex: 1; 
-  padding: 14px 20px;
-  font-size: 16px;
-
-  background: rgba(255, 255, 255, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 14px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+/* Utility margin helpers */
+.mt-8 {
+  margin-top: 8px;
 }
-
-.search-box button {
-  padding: 14px 24px;
-  border-radius: 14px;
-  background: linear-gradient(135deg, #00c6fb, #005bea);
-  font-weight: 700;
-  color: #fff;
-  box-shadow: 0 10px 20px rgba(0, 91, 234, 0.25);
+.mt-12 {
+  margin-top: 12px;
 }
-
-
-
-.btn {
-  padding: 10px 16px;
-  background: linear-gradient(135deg, #00c6fb, #005bea);
-  color: white;
-  border: none;
-  border-radius: 14px;
-  cursor: pointer;
-  font-weight: 700;
-  box-shadow: 0 6px 20px rgba(0, 91, 234, 0.25);
-  transition: 0.3s ease;
+.mt-16 {
+  margin-top: 16px;
 }
-
-.btn:hover {
-  transform: translateY(-2px);
-  filter: brightness(1.08);
-}
-
-.btn-sm {
-  padding: 7px 12px;
-  font-size: 13px;
-}
-
-.btn.remove {
-  background: linear-gradient(135deg, #ff6b6b, #b52b27);
-}
-
-.btn.remove:hover {
-  filter: brightness(1.05);
-}
-
-.card {
-  background: rgba(255, 255, 255, 0.65);
-  padding: 25px;
-  border-radius: 20px;
-
-  border: 1px solid rgba(255, 255, 255, 0.45);
-  box-shadow: 0 15px 30px rgba(0,0,0,0.07);
-
+.mt-20 {
   margin-top: 20px;
 }
-
-.card-title {
-  font-size: 22px;
-  font-weight: 700;
-  color: #005bea;
-  margin-bottom: 10px;
+.mb-8 {
+  margin-bottom: 8px;
 }
-
-.card-body p {
-  margin: 6px 0;
-  font-size: 15px;
-  color: #2c3e50;
+.mb-12 {
+  margin-bottom: 12px;
 }
-
-
-.tabs {
-  display: flex;
-  gap: 10px;
-  margin: 25px 0;
+.mb-16 {
+  margin-bottom: 16px;
 }
-
-.tabs button {
-  padding: 10px 20px;
-  border-radius: 20px;
-
-  background: rgba(255,255,255,0.8);
-  border: 1px solid #ddd;
-  cursor: pointer;
-  font-weight: 600;
-
-  transition: all 0.3s ease;
-}
-
-.tabs button.active {
-  background: #4facfe;
-  color: white;
-  border-color: #4facfe;
-}
-
-.tabs button:hover {
-  transform: translateY(-2px);
-  background: #fff;
-}
-
-
-.chart-box {
-  background: rgba(255, 255, 255, 0.65);
-  padding: 25px;
-  border-radius: 18px;
-
-  border: 1px solid rgba(255, 255, 255, 0.45);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-
-  margin: 25px 0;
-  height: 320px;
-}
-
-
-.history-list {
-  background: rgba(255,255,255,0.7);
-  padding: 15px;
-  border-radius: 14px;
-
-  border: 1px solid rgba(255,255,255,0.45);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-
+.mb-20 {
   margin-bottom: 20px;
 }
 
+/* Icon baseline */
+.icon {
+  display: inline-block;
+  margin-right: 6px;
+  font-size: 18px;
+}
+
+/* =========================================================
+   PAGE CONTAINER - FULL PAGE WIDTH
+   ========================================================= */
+
+.page-container,
+.home-container {
+  width: 100%;
+  max-width: 100%; /* remove limit */
+  margin: 0;
+  padding: 20px 40px;
+}
+
+
+/* On very small screens reduce side padding */
+@media (max-width: 768px) {
+  .page-container,
+  .home-container,
+  .forecast-page {
+    padding: 20px 14px 30px 14px;
+  }
+}
+
+/* =========================================================
+   🌤️ HEADER - BBC STYLE
+   ========================================================= */
+
+.main-header {
+  width: 1920px;
+  margin: auto;
+  background: #005bcb; /* BBC blue */
+  padding: 16px 26px;
+  border-radius: 0px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+
+  color: #ffffff;
+  border: 1px solid #004199;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+
+  margin-bottom: 26px;
+}
+
+/* LEFT: Logo */
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  font-size: 26px;
+}
+
+.logo-text {
+  font-size: 21px;
+  font-weight: 700;
+}
+
+/* CENTER: Navigation */
+.header-center {
+ 
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  position: absolute;
+   top: 50%;
+  /* Added for vertical centering */
+  left: 50%;
+  transform: translate(-50%, -50%);
+}.middle-gri
+
+.header-center a {
+  font-size: 15px;
+  font-weight: 600;
+  color: #e3edff;
+  opacity: 0.9;
+  padding-top: 20px;
+}
+
+.header-center a:hover {
+  opacity: 1;
+}
+
+.header-center a::after {
+  content: "";
+ 
+  left: 0;
+  bottom: 0;
+  width: 0;
+ 
+  background: #ffd500;
+  transition: width 0.25s ease;
+}
+
+.header-center a:hover::after {
+  width: 100%;
+}
+
+/* RIGHT: Search box */
+.header-right {
+  display: flex;
+  justify-content: flex-end;
+  padding: auto;
+}
+
+.searchbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  background: #ffffff;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid #c5d5f8;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.searchbox input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  width: 170px;
+}
+
+.searchbox button {
+  border: none;
+  border-radius: 999px;
+  background: #005bcb;
+  color: #ffffff;
+  padding: 4px 11px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.searchbox button:hover {
+  background: #0045a0;
+}
+
+/* Header responsive behaviour */
+@media (max-width: 900px) {
+  .main-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .header-left {
+    justify-content: center;
+  }
+
+  .header-center {
+    order: 3;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .header-right {
+    justify-content: center;
+  }
+
+  .searchbox input {
+    width: 130px;
+  }
+}
+
+/* =========================================================
+   🧊 GENERIC CARD / SECTION STYLES
+   ========================================================= */
+
+.section,
+.glass-card,
+.card {
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid #d7e0f4;
+  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.14);
+}
+
+/* Base card padding */
+.glass-card,
+.card,
+.section {
+  padding: 20px 22px;
+}
+
+/* Card title used inside <Card> component */
+.card-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 10px;
+}
+
+/* =========================================================
+   🔝 TOP ROW: FAVORITES + RECENT SEARCHES
+   ========================================================= */
+
+.top-row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;   /* two columns full width */
+  gap: 25px;
+  margin-bottom: 25px;
+  height:350px
+}
+
+
+/* Boxes inside top row */
+.favorites-box,
+.recent-box {
+  background: #ffffff;
+}
+
+/* Section headings */
+.favorites-box h3,
+.recent-box h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 12px;
+}
+
+/* Empty-state text */
+.favorites-box p,
+.recent-box p {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* FAVORITE ITEM ROW */
+.favorite-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #edf1fb;
+}
+
+.favorite-item:last-child {
+  border-bottom: none;
+}
+
+.favorite-item span {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* Favorite row buttons */
+.fav-buttons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* RECENT SEARCH ROW */
 .history-item {
   display: flex;
   justify-content: space-between;
-  padding: 8px 6px;
-  border-bottom: 1px solid rgba(0,0,0,0.08);
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #edf1fb;
 }
 
 .history-item:last-child {
   border-bottom: none;
 }
 
-
-.favorite-item {
-  padding: 8px 6px;
-  border-bottom: 1px solid rgba(0,0,0,0.08);
-  display: flex;
-  justify-content: space-between;
-}
-
-.favorite-item:last-child {
-  border-bottom: none;
-}
-
-.loader {
-  margin: 20px auto;
-  border: 4px solid rgba(255,255,255,0.5);
-  border-top: 4px solid #005bea;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-
-  animation: spin 0.9s linear infinite;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-
-.error-box {
-  background: rgba(255, 92, 92, 0.2);
-  padding: 14px;
-  border-left: 6px solid #ff4d4f;
-  border-radius: 10px;
-  color: #8b0000;
-  margin: 10px 0;
-}
-
-
-.flex { display: flex; }
-.space-between { justify-content: space-between; }
-.mt-20 { margin-top: 20px; }
-
-
-.home-layout {
-  display: flex;
-  gap: 25px;
-  width: 100%;
-}
-
-.left-panel {
-  flex: 1;
-}
-
-
-.right-panel {
-  width: 260px;
-}
-
-
-.favorites-box {
-  background: rgba(255, 255, 255, 0.7);
-  padding: 18px;
-  border-radius: 18px;
-
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.10);
-}
-
-.favorites-box h3 {
-  margin-top: 0;
-  margin-bottom: 12px;
-  color: #005bea;
-  font-size: 20px;
-}
-
-
-.favorite-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  padding: 10px 6px;
-  border-bottom: 1px solid rgba(0,0,0,0.08);
-}
-
-.favorite-item:last-child {
-  border-bottom: none;
-}
-
-
-.fav-buttons {
-  display: flex;
-  gap: 12px;        
-  align-items: center;
-}
-
-.fav-buttons .btn-sm {
-  padding: 6px 12px;
-  font-size: 13px;
-  border-radius: 10px;
-}
-
-
-.history-list h3 {
-  margin-top: 0;
-  margin-bottom: 12px;
-  color: #005bea;
-}
-
-.history-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  padding: 10px 6px;
-  border-bottom: 1px solid rgba(0,0,0,0.08);
-}
-
-
-@media (max-width: 900px) {
-  .home-layout {
-    flex-direction: column;
-  }
-
-  .right-panel {
-    width: 100%;
-  }
-}
-
-.chart-card {
-  background: rgba(255, 255, 255, 0.35);
-  backdrop-filter: blur(18px);
-  border-radius: 22px;
-
-  padding: 25px 30px;
-  margin: 25px 0;
-
-  border: 1px solid rgba(255, 255, 255, 0.45);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
-
-  animation: fadeIn 0.4s ease;
-}
-
-.chart-card h4 {
-  margin: 0 0 15px 0;
-  color: #003c8f;
-  font-size: 18px;
-  font-weight: 700;
-}
-
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.week-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 20px;
-  margin-top: 20px;
-}
-
-.week-card {
-  background: rgba(255,255,255,0.75);
-  border-radius: 20px;
-  padding: 20px;
-  text-align: center;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-  backdrop-filter: blur(15px);
-  transition: transform .3s, box-shadow .3s;
-}
-
-.week-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-}
-
-.weather-icon {
-  font-size: 40px;
-  margin-bottom: 10px;
-}
-
-
-.week-card h4 {
-  font-size: 17px;
-  margin-bottom: 10px;
-  color: #005bea;
-  font-weight: 700;
-}
-
-.week-card .max {
-  color: #e74c3c;
-  font-weight: 600;
-}
-
-.week-card .min {
-  color: #3498db;
-  font-weight: 600;
-}
-
-.week-card .wind {
-  color: #27ae60;
-  font-weight: 600;
-}
-
-.week-card .rain {
-  margin-top: 6px;
-  background: rgba(39, 174, 96, 0.15);
-  color: #27ae60;
-  padding: 4px 10px;
-  display: inline-block;
-  border-radius: 10px;
-  font-weight: 600;
-  font-size: 13px;
-}
-
-
-
-.home-container {
-  width: 100%;
-  max-width: 1100px;
-  margin: auto;
-}
-
-
-.top-section {
-  display: flex;
-  flex-direction: column;  
-  gap: 20px;
-  width: 100%;
-  margin-bottom: 25px;
-}
-
-.search-box-wrapper {
-  width: 100%;
-}
-
-.favorites-box {
-  width: 100%;         
-  margin-top: 10px;
-}
-
-
-
-.middle-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 25px;
-  width: 100%;
-}
-
-.recent-box,
-.weather-card {
-  min-height: 260px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-
-.weather-card .card-body p {
-  margin: 6px 0;
-}
-
-
-.weather-buttons {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  margin-top: 15px;
-}
-
-.favorite-item span {
-  font-weight: 600;
-}
-
 .history-item span {
-  font-size: 14px;
+  font-size: 13px;
+  color: #374151;
 }
 
-
-.favorites-box,
-.recent-box {
-  background: rgba(255, 255, 255, 0.55) !important;
-  backdrop-filter: blur(22px) !important;
-  border-radius: 18px;
-  padding: 18px;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-}
-
-
+/* Stack on mobile */
 @media (max-width: 900px) {
-  .top-section {
-    flex-direction: column;
-  }
-  .favorites-box {
-    width: 100%;
-  }
-  .middle-grid {
+  .top-row {
     grid-template-columns: 1fr;
   }
 }
-.icon {
+
+/* =========================================================
+   🌡️ WEATHER SECTION (FULL-WIDTH CARD)
+   ========================================================= */
+
+.weather-section {
+  width: 100%;
+}
+
+/* Use Card styling but a bit more padding & height */
+.weather-section .card {
+  width: 100%;
+  padding: 26px 28px;
+  min-height: 230px;
+}
+
+/* Weather city title is Card title already */
+
+/* Weather detail rows */
+.weather-section p {
+  font-size: 14px;
+  color: #1f2933;
+  margin: 5px 0;
+}
+
+/* Bolds in weather details */
+.weather-section b {
+  color: #111827;
+}
+
+/* Buttons below weather details */
+.weather-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+/* =========================================================
+   🔘 BUTTONS - PRIMARY / SMALL / DANGER
+   ========================================================= */
+
+.btn {
+  padding: 8px 13px;
+  border-radius: 16px;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+  background: #005bcb;
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.4);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px rgba(37, 99, 235, 0.5);
+  filter: brightness(1.03);
+}
+
+.btn-sm {
+  padding: 6px 11px;
+  font-size: 12px;
+  border-radius: 14px;
+}
+
+/* Danger variant */
+.btn.remove {
+  background: #ef4444;
+  box-shadow: 0 6px 18px rgba(239, 68, 68, 0.5);
+}
+
+.btn.remove:hover {
+  filter: brightness(1.05);
+}
+
+/* Disabled */
+.btn:disabled {
+  opacity: 0.65;
+  transform: none;
+  box-shadow: none;
+  cursor: default;
+}
+
+/* Link-like button (for forecast tabs etc.) */
+.btn-link {
+  background: transparent;
+  color: #005bcb;
+  box-shadow: none;
+  padding: 0;
+}
+
+/* =========================================================
+   🔁 LOADER & ERROR BOX
+   ========================================================= */
+
+.loader {
+  margin: 20px auto;
+  border: 4px solid #e5e7eb;
+  border-top: 4px solid #005bcb;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.error-box {
+  background: #fee2e2;
+  border-left: 4px solid #dc2626;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #7f1d1d;
+}
+
+/* =========================================================
+   📊 GENERIC TABS (Today / Week etc.)
+   ========================================================= */
+
+.tabs {
+  display: inline-flex;
+  gap: 8px;
+  margin: 16px 17px  15px 25px;
+}
+
+.tabs button {
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.tabs button.active {
+  background: #005bcb;
+  color: #ffffff;
+  border-color: #005bcb;
+}
+
+.tabs button:hover {
+  background: #eef2ff;
+}
+
+/* =========================================================
+   📈 FORECAST PAGE (OPTIONAL, FOR /forecast/:city)
+   ========================================================= */
+
+.forecast-page {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto 40px auto;
+  padding: 0 40px 40px 40px;
+}
+
+/* Header row: city name + actions */
+.forecast-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 10px;
+}
+
+.forecast-header-row h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.forecast-subtitle {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* top action buttons area */
+.forecast-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* Forecast-specific tabs below title */
+.forecast-tabs {
+  display: flex;
+  gap: 10px;
+  margin: 10px 0 18px 0;
+}
+
+.forecast-tabs button {
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid #cbd5f5;
+  background: #ffffff;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+  color: #1f2933;
+}
+
+.forecast-tabs button.active {
+  border-color: #005bcb;
+  background: #005bcb;
+  color: #ffffff;
+}
+
+/* ---------- TODAY WEATHER CARD ---------- */
+
+.today-card {
+  @media print {
+    page-break-inside: avoid;
+  }
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #d7e0f4;
+  padding: 18px 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: center;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.18);
+  margin-bottom: 18px;
+}
+
+.today-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.today-icon {
+  font-size: 36px;
+}
+
+.today-main {
+  display: flex;
+  flex-direction: column;
+}
+
+.today-temp {
+  font-size: 34px;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1.1;
+}
+
+.today-desc {
+  font-size: 14px;
+  color: #6b7280;
+  margin-top: 3px;
+}
+
+.today-right {
+  text-align: right;
+  font-size: 13px;
+  color: #4b5563;
+}
+
+.today-right div + div {
+  margin-top: 3px;
+}
+
+/* ---------- HOURLY SCROLL BAR ---------- */
+
+.hourly-scroll {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #d7e0f4;
+  padding: 10px 8px;
+  margin: 18px 0 20px 0;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.12);
+
+  overflow-x: auto;
+  white-space: nowrap;
+
+  scrollbar-width: thin;
+}
+
+/* Scrollbar for WebKit */
+.hourly-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+.hourly-scroll::-webkit-scrollbar-track {
+  background: #edf2ff;
+}
+.hourly-scroll::-webkit-scrollbar-thumb {
+  background: #c3cff2;
+  border-radius: 999px;
+}
+
+.hour-card {
   display: inline-block;
-  margin-right: 6px;
+  width: 80px;
+  text-align: center;
+  padding: 6px 4px;
+  border-right: 1px solid #ebeffa;
+}
+
+.hour-card:last-child {
+  border-right: none;
+}
+
+.hour-time {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.hour-icon {
   font-size: 20px;
+  margin: 3px 0;
+}
+
+.hour-temp {
+  font-size: 13px;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* ---------- WEEKLY GRID ---------- */
+
+.week-bbc {
+  margin-top: 8px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 14px;
+}
+
+.week-card-bbc {
+  background: #ffffff;
+  border-radius: 10px;
+  border: 1px solid #d7e0f4;
+  padding: 10px 8px;
+  text-align: center;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.14);
+}
+
+.week-day {
+  font-size: 13px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 4px;
+}
+
+.week-icon {
+  font-size: 24px;
+  margin: 2px 0;
+}
+
+.week-temp-high {
+  color: #dc2626;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.week-temp-low {
+  color: #2563eb;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.week-extra {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #6b7280;
+}
+.week-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin:10px 7px 10px 7px;
+}
+
+.week-card {
+    background-color: #afaeb4;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    text-align: center;
+}
+
+.week-card h4 {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    color: #d81b60;
+}
+
+.week-card p {
+    margin: 4px 0;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.week-card .max {
+    color: #d32f2f;
+}
+.week-card .min {
+    color: #1976d2;
+}
+
+.week-card .rain {
+    display: inline-block;
+    background-color: #4caf50;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 8px;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+.week-card .weather-icon {
+    font-size: 36px;
+}
+
+/* Forecast mobile behaviour */
+@media (max-width: 768px) {
+  .forecast-page {
+    padding: 0 12px 30px 12px;
+  }
+
+  .today-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .today-right {
+    text-align: left;
+  }
+}
+
+
+.left{
+  width: 60%;
+  gap: 90px;
+}
+.right{
+  width: 50%;
+  position: relative;
+}
+
+
+.chart-box {
+
+    background-color: #ffffff; 
+    
+
+    border-radius: 16px; 
+    
+    padding: 20px; 
+
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); 
+
+    margin: 25px; 
+}
+
+.nir{
+  padding-left: 25px;
 }
