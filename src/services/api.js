@@ -29,7 +29,7 @@ export async function getWeather(city) {
 
   } catch (err) {
     console.error("Weather API Error:", err);
-    throw err;
+    throw err;  
   }
 }
 

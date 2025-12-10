@@ -10,17 +10,21 @@ export default function Home({ registerSearchFn }) {
   const [data, setData] = useLocalStorage("current_weather", null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-
   const navigate = useNavigate();
 
   const [history, setHistory] = useLocalStorage("history", []);
   const [favorites, setFavorites] = useLocalStorage("favorites", []);
 
+  const capitalize = (str) =>
+    str
+      .toLowerCase()
+      .split(" ")
+      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+      .join(" ");
 
   useEffect(() => {
     registerSearchFn?.(handleSearch);
   }, []);
-
 
   useEffect(() => {
     function safeLoad(key, setter) {
@@ -39,7 +43,6 @@ export default function Home({ registerSearchFn }) {
     safeLoad("favorites", setFavorites);
   }, []);
 
-  // Search function
   const handleSearch = async (city) => {
     if (!city?.trim()) {
       setError("Enter a valid city name");
@@ -50,10 +53,11 @@ export default function Home({ registerSearchFn }) {
       setLoading(true);
       setError("");
 
-      const weather = await getWeather(city);
+      const formattedCity = capitalize(city);
+      const weather = await getWeather(formattedCity);
 
       const newData = {
-        city,
+        city: formattedCity,
         temp: weather.temp,
         feels_like: weather.feels_like,
         humidity: weather.humidity,
@@ -67,11 +71,10 @@ export default function Home({ registerSearchFn }) {
       setData(newData);
       localStorage.setItem("current_weather", JSON.stringify(newData));
 
-      // 🛑 FIX AREA: Setting the search history limit here 
       const updatedHistory = [
-        { city, time: new Date().toLocaleString() },
-        ...history.filter((i) => i.city !== city),
-      ].slice(0, 5); // <-- Limit is set to 5
+        { city: formattedCity, time: new Date().toLocaleString() },
+        ...history.filter((i) => i.city !== formattedCity),
+      ].slice(0, 5);
 
       setHistory(updatedHistory);
       localStorage.setItem("history", JSON.stringify(updatedHistory));
@@ -82,7 +85,6 @@ export default function Home({ registerSearchFn }) {
     }
   };
 
-  // Favorites functions
   const addToFavorites = (city) => {
     if (!favorites.includes(city)) {
       const updated = [...favorites, city];
@@ -99,17 +101,9 @@ export default function Home({ registerSearchFn }) {
 
   return (
     <div className="page-container">
-
-      {/* ---------------------------------- */}
-      {/* ROW 1 — FAVORITES + RECENT       */}
-      {/* ---------------------------------- */}
-
       <div className="top-row">
-
-        {/* FAVORITES BOX — left side */}
         <div className="favorites-box section">
           <h3>⭐ Favorites</h3>
-
           {favorites.length === 0 ? (
             <p>No favorites yet</p>
           ) : (
@@ -117,7 +111,7 @@ export default function Home({ registerSearchFn }) {
               <div className="favorite-item" key={idx}>
                 <span>{city}</span>
                 <div className="fav-buttons">
-                  <button className="btn btn-sm" onClick={() => handleSearch(city)}>Load</button>
+                  <button className="btn btn-sm" onClick={() => handleSearch(city)}>View</button>
                   <button className="btn btn-sm remove" onClick={() => removeFavorite(city)}>Remove</button>
                 </div>
               </div>
@@ -125,27 +119,24 @@ export default function Home({ registerSearchFn }) {
           )}
         </div>
 
-    
         <div className="recent-box section">
           <h3>Recent Searches</h3>
-
           {history.length === 0 ? (
             <p>No recent searches</p>
           ) : (
             history.map((item, idx) => (
               <div className="history-item" key={idx}>
                 <span>{item.city} — {item.time}</span>
-                <button className="btn btn-sm" onClick={() => handleSearch(item.city)}>Load</button>
+                <button className="btn btn-sm" onClick={() => handleSearch(item.city)}>View</button>
               </div>
             ))
           )}
         </div>
-
       </div>
 
       {data && (
         <div className="weather-section section">
-          <Card title={data.city}>
+          <Card title={capitalize(data.city)}>
             <p><span className="icon">🌡️</span><b>Temperature:</b> {data.temp}°C</p>
             <p><span className="icon">🥵</span><b>Feels Like:</b> {data.feels_like}°C</p>
             <p><span className="icon">💧</span><b>Humidity:</b> {data.humidity}%</p>
@@ -163,7 +154,6 @@ export default function Home({ registerSearchFn }) {
 
       {loading && <Loader />}
       {error && <ErrorBox message={error} />}
-
     </div>
   );
 }

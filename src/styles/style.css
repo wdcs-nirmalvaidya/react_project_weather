@@ -1,7 +1,3 @@
-/* =========================================================
-   🌍 GLOBAL RESET + BASE
-   ========================================================= */
-
 *,
 *::before,
 *::after {
@@ -20,7 +16,7 @@ body {
   font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
 
-  /* Soft BBC-like gradient */
+
   background: linear-gradient(180deg, #d3e0ff 0%, #e3ecff 40%, #f4f7ff 100%);
   min-height: 100vh;
 
@@ -31,13 +27,13 @@ body {
   color: #111827;
 }
 
-/* Basic link reset */
+
 a {
   color: inherit;
   text-decoration: none;
 }
 
-/* Utility flex helpers */
+
 .flex {
   display: flex;
 }
@@ -52,7 +48,7 @@ a {
   justify-content: space-between;
 }
 
-/* Utility margin helpers */
+
 .mt-8 {
   margin-top: 8px;
 }
@@ -77,28 +73,21 @@ a {
 .mb-20 {
   margin-bottom: 20px;
 }
-
-/* Icon baseline */
 .icon {
   display: inline-block;
   margin-right: 6px;
   font-size: 18px;
 }
 
-/* =========================================================
-   PAGE CONTAINER - FULL PAGE WIDTH
-   ========================================================= */
 
 .page-container,
 .home-container {
   width: 100%;
-  max-width: 100%; /* remove limit */
   margin: 0;
   padding: 20px 40px;
 }
 
 
-/* On very small screens reduce side padding */
 @media (max-width: 768px) {
   .page-container,
   .home-container,
@@ -107,14 +96,12 @@ a {
   }
 }
 
-/* =========================================================
-   🌤️ HEADER - BBC STYLE
-   ========================================================= */
+
 
 .main-header {
   width: 1920px;
   margin: auto;
-  background: #005bcb; /* BBC blue */
+  background: #005bcb; 
   padding: 16px 26px;
   border-radius: 0px;
 
@@ -130,7 +117,7 @@ a {
   margin-bottom: 26px;
 }
 
-/* LEFT: Logo */
+
 .header-left {
   display: flex;
   align-items: center;
@@ -142,11 +129,11 @@ a {
 }
 
 .logo-text {
-  font-size: 21px;
+  font-size: 25px;
   font-weight: 700;
 }
 
-/* CENTER: Navigation */
+
 .header-center {
  
   display: flex;
@@ -154,7 +141,7 @@ a {
   gap: 32px;
   position: absolute;
    top: 50%;
-  /* Added for vertical centering */
+
   left: 50%;
   transform: translate(-50%, -50%);
 }.middle-gri
@@ -186,7 +173,7 @@ a {
   width: 100%;
 }
 
-/* RIGHT: Search box */
+
 .header-right {
   display: flex;
   justify-content: flex-end;
@@ -228,7 +215,7 @@ a {
   background: #0045a0;
 }
 
-/* Header responsive behaviour */
+
 @media (max-width: 900px) {
   .main-header {
     flex-direction: column;
@@ -255,9 +242,7 @@ a {
   }
 }
 
-/* =========================================================
-   🧊 GENERIC CARD / SECTION STYLES
-   ========================================================= */
+
 
 .section,
 .glass-card,
@@ -268,58 +253,57 @@ a {
   box-shadow: 0 10px 26px rgba(15, 23, 42, 0.14);
 }
 
-/* Base card padding */
+
 .glass-card,
 .card,
 .section {
   padding: 20px 22px;
 }
 
-/* Card title used inside <Card> component */
+
 .card-title {
-  font-size: 18px;
+  font-size: 25px;
   font-weight: 700;
   color: #1f2937;
   margin-bottom: 10px;
 }
 
-/* =========================================================
-   🔝 TOP ROW: FAVORITES + RECENT SEARCHES
-   ========================================================= */
+
+
 
 .top-row {
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr;   /* two columns full width */
+  grid-template-columns: 1fr 1fr;   
   gap: 25px;
   margin-bottom: 25px;
-  height:350px
+  height:370px
 }
 
 
-/* Boxes inside top row */
+
 .favorites-box,
 .recent-box {
   background: #ffffff;
 }
 
-/* Section headings */
+
 .favorites-box h3,
 .recent-box h3 {
-  font-size: 18px;
+  font-size: 25px;
   font-weight: 700;
   color: #1f2937;
   margin-bottom: 12px;
 }
 
-/* Empty-state text */
+
 .favorites-box p,
 .recent-box p {
-  font-size: 14px;
+  font-size: 18px;
   color: #6b7280;
 }
 
-/* FAVORITE ITEM ROW */
+
 .favorite-item {
   display: flex;
   justify-content: space-between;
@@ -333,19 +317,19 @@ a {
 }
 
 .favorite-item span {
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 600;
   color: #111827;
 }
 
-/* Favorite row buttons */
+
 .fav-buttons {
   display: flex;
   gap: 8px;
   align-items: center;
 }
 
-/* RECENT SEARCH ROW */
+
 .history-item {
   display: flex;
   justify-content: space-between;
@@ -370,100 +354,81 @@ a {
   }
 }
 
-/* =========================================================
-   🌡️ WEATHER SECTION (FULL-WIDTH CARD)
-   ========================================================= */
+
 
 .weather-section {
   width: 100%;
 }
-
-/* Use Card styling but a bit more padding & height */
 .weather-section .card {
   width: 100%;
   padding: 26px 28px;
   min-height: 230px;
 }
 
-/* Weather city title is Card title already */
 
-/* Weather detail rows */
+
 .weather-section p {
-  font-size: 14px;
+  font-size: 18px;
   color: #1f2933;
   margin: 5px 0;
 }
 
-/* Bolds in weather details */
 .weather-section b {
   color: #111827;
 }
 
-/* Buttons below weather details */
+
 .weather-buttons {
   display: flex;
-  gap: 10px;
+  gap: 15px;
   margin-top: 14px;
 }
 
-/* =========================================================
-   🔘 BUTTONS - PRIMARY / SMALL / DANGER
-   ========================================================= */
 
+/* BASE BUTTON */
+ /* BASE BUTTON — SAME SIZE BUT MORE ATTRACTIVE */
+/* BASE BUTTON */
 .btn {
-  padding: 8px 13px;
+  padding: 8px 13px;                 
   border-radius: 16px;
   border: none;
   cursor: pointer;
-  font-size: 13px;
+
+  font-size: 13px;                  
   font-weight: 600;
   color: #ffffff;
-  background: #005bcb;
-  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.4);
-  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s;
+
+  background: linear-gradient(135deg, #1d4ed8, #2563eb);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+
+  transition: 0.2s ease-in-out;
 }
 
 .btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 8px 22px rgba(37, 99, 235, 0.5);
-  filter: brightness(1.03);
+  filter: brightness(1.07);
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.55);
 }
 
+/* SMALL BUTTON (you are using this!) */
 .btn-sm {
-  padding: 6px 11px;
-  font-size: 12px;
-  border-radius: 14px;
+  padding: 8px 13px;   /* keep same exact size */
+  font-size: 13px;
 }
 
-/* Danger variant */
-.btn.remove {
-  background: #ef4444;
-  box-shadow: 0 6px 18px rgba(239, 68, 68, 0.5);
+/* REMOVE BUTTON (this is the class you really use) */
+.remove {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.45);
 }
 
-.btn.remove:hover {
-  filter: brightness(1.05);
+.remove:hover {
+  filter: brightness(1.12);
+  box-shadow: 0 6px 18px rgba(239, 68, 68, 0.75);
 }
 
-/* Disabled */
-.btn:disabled {
-  opacity: 0.65;
-  transform: none;
-  box-shadow: none;
-  cursor: default;
-}
 
-/* Link-like button (for forecast tabs etc.) */
-.btn-link {
-  background: transparent;
-  color: #005bcb;
-  box-shadow: none;
-  padding: 0;
-}
 
-/* =========================================================
-   🔁 LOADER & ERROR BOX
-   ========================================================= */
 
 .loader {
   margin: 20px auto;
@@ -491,25 +456,24 @@ a {
   color: #7f1d1d;
 }
 
-/* =========================================================
-   📊 GENERIC TABS (Today / Week etc.)
-   ========================================================= */
+
 
 .tabs {
   display: inline-flex;
-  gap: 8px;
-  margin: 16px 17px  15px 25px;
+  gap: 12px;                 /* Bigger gap */
+  margin: 20px 25px;         /* Slightly bigger outer gap */
 }
 
 .tabs button {
-  padding: 6px 12px;
+  padding: 12px 22px;        /* Bigger buttons */
   border-radius: 999px;
   border: 1px solid #d1d5db;
   background: #ffffff;
   cursor: pointer;
-  font-size: 13px;
+  font-size: 16px;           /* Bigger text */
   font-weight: 600;
   color: #374151;
+  transition: 0.2s ease;
 }
 
 .tabs button.active {
@@ -522,9 +486,8 @@ a {
   background: #eef2ff;
 }
 
-/* =========================================================
-   📈 FORECAST PAGE (OPTIONAL, FOR /forecast/:city)
-   ========================================================= */
+
+
 
 .forecast-page {
   width: 100%;
@@ -533,7 +496,6 @@ a {
   padding: 0 40px 40px 40px;
 }
 
-/* Header row: city name + actions */
 .forecast-header-row {
   display: flex;
   justify-content: space-between;
@@ -553,13 +515,12 @@ a {
   color: #6b7280;
 }
 
-/* top action buttons area */
+
 .forecast-actions {
   display: flex;
   gap: 8px;
 }
 
-/* Forecast-specific tabs below title */
 .forecast-tabs {
   display: flex;
   gap: 10px;
@@ -583,7 +544,7 @@ a {
   color: #ffffff;
 }
 
-/* ---------- TODAY WEATHER CARD ---------- */
+
 
 .today-card {
   @media print {
@@ -639,7 +600,7 @@ a {
   margin-top: 3px;
 }
 
-/* ---------- HOURLY SCROLL BAR ---------- */
+
 
 .hourly-scroll {
   background: #ffffff;
@@ -655,7 +616,7 @@ a {
   scrollbar-width: thin;
 }
 
-/* Scrollbar for WebKit */
+
 .hourly-scroll::-webkit-scrollbar {
   height: 6px;
 }
@@ -695,7 +656,6 @@ a {
   color: #111827;
 }
 
-/* ---------- WEEKLY GRID ---------- */
 
 .week-bbc {
   margin-top: 8px;
@@ -790,7 +750,7 @@ a {
     font-size: 36px;
 }
 
-/* Forecast mobile behaviour */
+
 @media (max-width: 768px) {
   .forecast-page {
     padding: 0 12px 30px 12px;
@@ -833,4 +793,9 @@ a {
 
 .nir{
   padding-left: 25px;
+}
+
+.recent-box .history-item span {
+  font-size: 15px;   
+  font-weight: 500;
 }

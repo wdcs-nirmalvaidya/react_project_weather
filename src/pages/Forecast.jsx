@@ -2,11 +2,19 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Tabs from "../components/Tabs";
 import ChartWrapper from "../components/ChartWrapper";
-import Loader from "../components/Loader"; 
+import Loader from "../components/Loader";
 import { getForecast } from "../services/api";
 
 export default function Forecast() {
   const { city } = useParams();
+
+
+  const titleCase = (str) =>
+    str
+      .toLowerCase()
+      .split(" ")
+      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+      .join(" ");
 
   const [forecastData, setForecastData] = useState([]);
   const [activeTab, setActiveTab] = useState("today");
@@ -31,10 +39,8 @@ export default function Forecast() {
 
         setForecastData(formatted);
         localStorage.setItem("forecast_data", JSON.stringify(formatted));
-
       } catch (err) {
         console.error("Forecast load error:", err);
-
 
         try {
           const saved = localStorage.getItem("forecast_data");
@@ -45,7 +51,6 @@ export default function Forecast() {
         } catch {
           localStorage.removeItem("forecast_data");
         }
-
       } finally {
         setLoading(false);
       }
@@ -53,7 +58,6 @@ export default function Forecast() {
 
     load();
   }, [city]);
-
 
   function buildDailyCards(hourly) {
     const days = {};
@@ -72,12 +76,12 @@ export default function Forecast() {
       const temps = days[date].temps;
       const winds = days[date].winds;
 
-      // FIX: Check if arrays are empty and handle safely to avoid the TypeError crash
       const safeMax = temps.length > 0 ? Math.max(...temps) : 0;
       const safeMin = temps.length > 0 ? Math.min(...temps) : 0;
-      const safeWind = winds.length > 0 
-        ? Math.round(winds.reduce((a, b) => a + b, 0) / winds.length) 
-        : 0;
+      const safeWind =
+        winds.length > 0
+          ? Math.round(winds.reduce((a, b) => a + b, 0) / winds.length)
+          : 0;
 
       return {
         date: new Date(date),
@@ -105,13 +109,12 @@ export default function Forecast() {
     tomorrow: tomorrowData,
   };
 
-
   if (loading) {
     return (
       <div style={{ textAlign: "center", marginTop: "40px" }}>
         <Loader />
         <p style={{ color: "white", marginTop: "15px" }}>
-          Loading forecast for {city}...
+          Loading forecast for {titleCase(city)}...
         </p>
       </div>
     );
@@ -119,7 +122,7 @@ export default function Forecast() {
 
   return (
     <div>
-      <h2 className="nir">Forecast for {city}</h2>
+      <h2 className="nir">Forecast for {titleCase(city)}</h2>
 
       <Tabs
         active={activeTab}
@@ -127,7 +130,6 @@ export default function Forecast() {
         tabs={["today", "tomorrow", "week"]}
       />
 
-      {/* TODAY + TOMORROW View with chart-box styling */}
       {activeTab !== "week" && (
         <>
           <div className="chart-box">
@@ -148,7 +150,6 @@ export default function Forecast() {
         </>
       )}
 
-      {/* WEEK VIEW with grid and card styling */}
       {activeTab === "week" && (
         <div className="week-grid">
           {weekCards.map((d, idx) => (

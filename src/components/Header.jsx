@@ -10,7 +10,7 @@ export default function Header({ onSearch }) {
       {/* LEFT - LOGO */}
       <div className="header-left">
         <span className="logo">🌤️</span>
-        <span className="logo-text">WeatherApp</span>
+        <span className="logo-text">SkyCast</span>
       </div>
  </div>
       {/* CENTER - NAVIGATION */}
