@@ -27,20 +27,16 @@ export default function Home({ registerSearchFn }) {
   }, []);
 
   useEffect(() => {
-    function safeLoad(key, setter) {
-      try {
-        const raw = localStorage.getItem(key);
-        if (!raw) return;
-        const parsed = JSON.parse(raw);
-        if (parsed) setter(parsed);
-      } catch {
-        localStorage.removeItem(key);
-      }
-    }
+    try {
+      const savedData = localStorage.getItem("current_weather");
+      if (savedData) setData(JSON.parse(savedData));
 
-    safeLoad("current_weather", setData);
-    safeLoad("history", setHistory);
-    safeLoad("favorites", setFavorites);
+      const savedHistory = localStorage.getItem("history");
+      if (savedHistory) setHistory(JSON.parse(savedHistory));
+
+      const savedFav = localStorage.getItem("favorites");
+      if (savedFav) setFavorites(JSON.parse(savedFav));
+    } catch {}
   }, []);
 
   const handleSearch = async (city) => {
@@ -136,19 +132,45 @@ export default function Home({ registerSearchFn }) {
 
       {data && (
         <div className="weather-section section">
-          <Card title={capitalize(data.city)}>
-            <p><span className="icon">🌡️</span><b>Temperature:</b> {data.temp}°C</p>
-            <p><span className="icon">🥵</span><b>Feels Like:</b> {data.feels_like}°C</p>
-            <p><span className="icon">💧</span><b>Humidity:</b> {data.humidity}%</p>
-            <p><span className="icon">🌬️</span><b>Wind Speed:</b> {data.wind} km/h</p>
-            <p><span className="icon">☁️</span><b>Cloud Coverage:</b> {data.cloud}%</p>
-            <p><span className="icon">🫁</span><b>AQI:</b> {data.aqi}</p>
+          <div className="wc-container">
 
-            <div className="weather-buttons">
-              <button className="btn btn-sm" onClick={() => addToFavorites(data.city)}>★ Add to Favorites</button>
-              <button className="btn btn-sm" onClick={() => navigate(`/forecast/${data.city}`)}>📈 View Forecast</button>
+  
+            <div className="wc-left">
+              <h2 className="wc-city">{capitalize(data.city)}</h2>
+
+              <h1 className="wc-temp">{data.temp}°</h1>
+              <p className="wc-condition">Sunny / Mild</p>
+              <p className="wc-feel">RealFeel® {data.feels_like}°</p>
+
+              <div className="wc-stats">
+                <div className="wc-stat"><span>🌬️</span> {data.wind} km/h</div>
+                <div className="wc-stat"><span>💧</span> {data.humidity}%</div>
+                <div className="wc-stat"><span>🫁</span> AQI {data.aqi}</div>
+              </div>
+
+              <div className="wc-buttons">
+                <button
+                  className="btn btn-sm wc-btn-blue"
+                  onClick={() => addToFavorites(data.city)}
+                >
+                  ★ Add to Favorites
+                </button>
+
+                <button
+                  className="btn btn-sm wc-btn-forecast"
+                  onClick={() => navigate(`/forecast/${data.city}`)}
+                >
+                  📈 View Forecast
+                </button>
+              </div>
             </div>
-          </Card>
+
+            {/* RIGHT */}
+            <div className="wc-right">
+              <div className="wc-big-icon">🌤️</div>
+            </div>
+
+          </div>
         </div>
       )}
 

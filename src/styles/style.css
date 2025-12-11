@@ -242,12 +242,10 @@ a {
   }
 }
 
-
-
 .section,
 .glass-card,
 .card {
-  background: #ffffff;
+  background: #f6f5fa;
   border-radius: 14px;
   border: 1px solid #d7e0f4;
   box-shadow: 0 10px 26px rgba(15, 23, 42, 0.14);
@@ -319,7 +317,7 @@ a {
 .favorite-item span {
   font-size: 18px;
   font-weight: 600;
-  color: #111827;
+  color: #f0f1f5;
 }
 
 
@@ -344,7 +342,7 @@ a {
 
 .history-item span {
   font-size: 13px;
-  color: #374151;
+  color: #e1e4e9;
 }
 
 /* Stack on mobile */
@@ -361,7 +359,7 @@ a {
 }
 .weather-section .card {
   width: 100%;
-  padding: 26px 28px;
+  padding: 93px 28px;
   min-height: 230px;
 }
 
@@ -374,7 +372,7 @@ a {
 }
 
 .weather-section b {
-  color: #111827;
+  color: #e9ecf1;
 }
 
 
@@ -410,21 +408,21 @@ a {
   box-shadow: 0 6px 18px rgba(37, 99, 235, 0.55);
 }
 
-/* SMALL BUTTON (you are using this!) */
+
 .btn-sm {
-  padding: 8px 13px;   /* keep same exact size */
+  padding: 8px 13px;   
   font-size: 13px;
 }
 
-/* REMOVE BUTTON (this is the class you really use) */
+
 .remove {
   background: linear-gradient(135deg, #ef4444, #dc2626);
-  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.45);
+
 }
 
 .remove:hover {
   filter: brightness(1.12);
-  box-shadow: 0 6px 18px rgba(239, 68, 68, 0.75);
+
 }
 
 
@@ -460,17 +458,17 @@ a {
 
 .tabs {
   display: inline-flex;
-  gap: 12px;                 /* Bigger gap */
-  margin: 20px 25px;         /* Slightly bigger outer gap */
+  gap: 12px;                 
+  margin: 20px 25px;         
 }
 
 .tabs button {
-  padding: 12px 22px;        /* Bigger buttons */
+  padding: 12px 22px;        
   border-radius: 999px;
   border: 1px solid #d1d5db;
   background: #ffffff;
   cursor: pointer;
-  font-size: 16px;           /* Bigger text */
+  font-size: 16px;           
   font-weight: 600;
   color: #374151;
   transition: 0.2s ease;
@@ -798,4 +796,499 @@ a {
 .recent-box .history-item span {
   font-size: 15px;   
   font-weight: 500;
+}
+
+:root {
+  --bg: #eef3ff;
+  --header-bg: #0066ff;
+  --text: #ffffff;
+  --card-bg: #ffffff;
+  --card-text: #111827;
+}
+
+
+[data-theme="dark"] {
+  --bg: #0f172a;
+  --header-bg: #0a0f1f;
+  --text: #e2e8f0;
+  --card-bg: #1e293b;
+  --card-text: #f1f5f9;
+}
+
+body {
+  background: var(--bg);
+  color: var(--card-text);
+  transition: 0.25s ease;
+}
+
+.main-header {
+  background: var(--header-bg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 25px;
+  color: var(--text);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+  transition: 0.25s ease;
+}
+
+
+[data-theme="dark"] .main-header {
+  border-bottom: 1px solid #1e293b;
+}
+
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-text {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+
+.header-right a {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.searchbox {
+  background: white;
+  padding: 5px 12px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.searchbox input {
+  border: none;
+  outline: none;
+  width: 150px;
+  font-size: 14px;
+}
+
+.searchbox button {
+  background: #005bcb;
+  color: white;
+  border: none;
+  padding: 5px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+
+[data-theme="dark"] .searchbox {
+  background: #f8fafc;
+}
+
+[data-theme="dark"] .searchbox input {
+  color: #111;
+}
+
+
+.theme-switch {
+  width: 40px;
+  height: 20px;
+  background: #d1d5db;
+  border-radius: 30px;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: 0.3s ease;
+}
+
+.switch-circle {
+  width: 16px;
+  height: 16px;
+  background: #ffffff;
+  border-radius: 50%;
+  position: absolute;
+  left: 2px;
+  transition: 0.25s ease;
+}
+
+.switch-circle.dark {
+  left: 22px;
+}
+
+
+[data-theme="dark"] .theme-switch {
+  background: #4b5563;
+}
+
+
+.section,
+.card {
+  background: var(--card-bg);
+  color: var(--card-text);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 5px 14px rgba(0,0,0,0.1);
+  transition: 0.25s;
+}
+
+
+[data-theme="dark"] .section,
+[data-theme="dark"] .card {
+  background: #1e293b;
+  color: #010d1a;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.6);
+}
+
+
+.section h3 {
+  color: var(--card-text);
+}
+
+[data-theme="dark"] .section h3 {
+  color: #f8fafc;
+}
+
+
+.history-item,
+.favorite-item {
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+[data-theme="dark"] .history-item,
+[data-theme="dark"] .favorite-item {
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+
+.btn {
+  padding: 8px 13px;
+  border-radius: 16px;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+  background: #005bcb;
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.4);
+  transition: 0.25s;
+}
+
+.btn.remove {
+  background: #ef4444;
+}
+
+/* Buttons — Dark Mode */
+[data-theme="dark"] .btn {
+  box-shadow: 0 6px 18px rgba(255,255,255,0.1);
+}
+
+[data-theme="dark"] .btn.remove {
+  background: #dc2626;
+}
+
+
+.icon {
+  margin-right: 5px;
+}
+
+[data-theme="dark"] .icon {
+  filter: brightness(1.2);
+}
+
+
+.week-card {
+  background: var(--card-bg);
+  color: var(--card-text);
+  border-radius: 12px;
+  padding: 15px;
+  transition: 0.25s ease;
+}
+
+[data-theme="dark"] .week-card {
+  background: #1e293b;
+  color: #e2e8f0;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.7);
+}
+
+
+
+
+[data-theme="light"] .section,
+[data-theme="light"] .card,
+[data-theme="light"] .favorite-item,
+[data-theme="light"] .history-item,
+[data-theme="light"] .weather-section,
+[data-theme="light"] .weather-section p,
+[data-theme="light"] .weather-section span,
+[data-theme="light"] .weather-section b,
+[data-theme="light"] .weather-section .icon {
+  color: #111827 !important;
+}
+
+
+
+[data-theme="dark"] .section,
+[data-theme="dark"] .card,
+[data-theme="dark"] .favorite-item,
+[data-theme="dark"] .history-item,
+[data-theme="dark"] .weather-section,
+[data-theme="dark"] .weather-section p,
+[data-theme="dark"] .weather-section span,
+[data-theme="dark"] .weather-section b,
+[data-theme="dark"] .weather-section .icon {
+  color: #f1f5f9 !important;
+}
+
+
+
+[data-theme="light"] .section,
+[data-theme="light"] .favorite-item,
+[data-theme="light"] .history-item,
+[data-theme="light"] .favorite-item span,
+[data-theme="light"] .history-item span,
+[data-theme="light"] .section span,
+[data-theme="light"] .section p,
+[data-theme="light"] .section b,
+[data-theme="light"] .card,
+[data-theme="light"] .card *,
+[data-theme="light"] .weather-section,
+[data-theme="light"] .weather-section *,
+[data-theme="light"] .week-card,
+[data-theme="light"] .week-card * {
+  color: #111 !important;
+  opacity: 1 !important;
+}
+
+[data-theme="light"] .tabs-container {
+  background: #ffffff !important;
+  padding: 14px 18px;
+  border-radius: 16px;
+  display: inline-flex;
+  gap: 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+
+[data-theme="light"] .tabs-container button {
+  padding: 10px 22px;
+  font-size: 15px;
+  border-radius: 30px;
+  border: 1px solid #d1d5db;
+  background: white;
+  font-weight: 600;
+  color: #333;
+}
+
+
+[data-theme="light"] .tabs-container button.active {
+  background: #005bcb;
+  color: white;
+  border-color: #005bcb;
+}
+
+
+
+
+[data-theme="light"] .tabs-container {
+  background: #ffffff !important;
+  padding: 14px 18px;
+  border-radius: 18px;
+  display: inline-flex;
+  gap: 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+[data-theme="light"] .tabs-container button {
+  padding: 10px 22px;
+  font-size: 15px;
+  border-radius: 30px;
+  border: 1px solid #d1d5db;
+  background: white;
+  font-weight: 600;
+  color: #333;
+}
+
+[data-theme="light"] .tabs-container button.active {
+  background: #005bcb;
+  color: white;
+  border-color: #005bcb;
+}
+
+
+[data-theme="dark"] .tabs-container {
+  background: #060621 !important;
+  padding: 14px 18px;
+  border-radius: 18px;
+  display: inline-flex;
+  gap: 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+}
+
+
+[data-theme="dark"] .tabs-container button {
+  padding: 10px 22px;
+  font-size: 15px;
+  border-radius: 30px;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  font-weight: 600;
+  color: #333;
+}
+
+
+[data-theme="dark"] .tabs-container button.active {
+  background: #005bcb;
+  color: #ffffff;
+  border-color: #005bcb;
+}
+
+
+
+
+.wc-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 35px;
+  border-radius: 20px;
+  min-height: 250px;
+  transition: 0.3s ease;
+}
+
+
+:root .wc-container {
+  background: linear-gradient(135deg, #ffffff, #e9f1ff);
+  color: #020918;
+  box-shadow: 0 5px 25px rgba(237, 238, 243, 0.08);
+}
+
+
+[data-theme="dark"] .wc-container {
+  background: linear-gradient(135deg, #1e293b, #111827);
+  color: #e5e7eb;
+  box-shadow: none;
+}
+
+
+.wc-left {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.wc-city {
+  font-size: 28px;
+  font-weight: 700;
+  opacity: 0.9;
+}
+
+.wc-temp {
+  font-size: 58px;
+  font-weight: 700;
+}
+
+.wc-condition {
+  font-size: 22px;
+  opacity: 0.9;
+}
+
+.wc-feel {
+  font-size: 15px;
+  opacity: 0.8;
+}
+
+
+.wc-stats {
+  display: flex;
+  gap: 14px;
+  margin: 12px 0;
+}
+
+.wc-stat {
+  background: rgba(0, 0, 0, 0.08);
+  padding: 6px 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+
+[data-theme="dark"] .wc-stat {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+
+.wc-buttons {
+  display: flex;
+  gap: 14px;
+  margin-top: 15px;
+}
+
+
+.wc-btn-blue {
+  background: #0066ff !important;
+  color: #fff !important;
+  padding: 10px 18px !important;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 4px 10px rgba(0, 102, 255, 0.4);
+  transition: 0.2s ease;
+}
+
+.wc-btn-blue:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+}
+
+.wc-btn-forecast {
+  padding: 10px 18px !important;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+
+:root .wc-btn-forecast {
+  background: #0066ff;
+  color: #fff;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 102, 255, 0.45);
+}
+
+
+[data-theme="dark"] .wc-btn-forecast {
+  border: 2px solid #fff;
+  color: #fff;
+  background: transparent;
+  box-shadow: none;
+}
+
+[data-theme="dark"] .wc-btn-forecast:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+
+.wc-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 30px;
+}
+
+.wc-big-icon {
+  font-size: 90px;
+  opacity: 1;
+  filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.2));
 }
