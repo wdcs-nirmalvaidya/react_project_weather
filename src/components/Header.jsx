@@ -1,22 +1,32 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 
 export default function Header({ onSearch, theme, toggleTheme }) {
   const [city, setCity] = useState("");
+  const location = useLocation(); 
 
   return (
     <header className="main-header">
-  
       <div className="header-left">
         <span className="logo">🌤️</span>
         <span className="logo-text">SkyCast</span>
       </div>
 
-
       <nav className="header-right">
-        
-        <Link to="/">Home</Link>
-        <Link to="/forecast/delhi">Forecast</Link>
+
+        <Link
+          to="/"
+          className={location.pathname === "/" ? "active" : ""}
+        >
+          Home
+        </Link>
+
+        <Link
+          to="/forecast/delhi"
+          className={location.pathname.includes("/forecast") ? "active" : ""}
+        >
+          Forecast
+        </Link>
 
         <div className="searchbox">
           <span className="search-icon">🔍</span>
@@ -37,7 +47,6 @@ export default function Header({ onSearch, theme, toggleTheme }) {
         >
           <div className={`switch-circle ${theme}`}></div>
         </div>
-
       </nav>
     </header>
   );

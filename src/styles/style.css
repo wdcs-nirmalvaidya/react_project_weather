@@ -180,6 +180,33 @@ a {
   padding: auto;
 }
 
+.header-right a {
+  position: relative;
+  padding-bottom: 3px;
+  margin-right: 25px;
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 600;
+}
+
+
+.header-right a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  height: 2px;
+  width: 0%;
+  background: var(--text);
+  transition: width 0.25s ease;
+}
+
+
+.header-right a.active::after {
+  width: 100%;
+}
+
+
 .searchbox {
   display: inline-flex;
   align-items: center;
